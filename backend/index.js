@@ -40,6 +40,37 @@ app.get('/producto', (req, res) => {
     })
 })
 
+//Actualizar productos
+app.put('/update', (req, res) => {
+    const id = req.body.id;
+    const name = req.body.name;
+    const code = req.body.code;
+    const description = req.body.description;
+    const price = req.body.price;
+    const stock = req.body.stock;
+
+    db.query('UPDATE product SET name=?, code=?, description=?, price=?, stock=? WHERE id=?', [name, code, description, price, stock,id], (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send('product updated')
+        }
+    })
+})
+
+//eliminar productos
+app.delete('/delete/:id', (req, res) => {
+    const id = req.params.id;
+
+    db.query('DELETE FROM product WHERE id=?', id, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
+})
+
 app.listen(3001, () => {
     console.log('Server is running on port 3001')
 })

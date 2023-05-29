@@ -12,6 +12,8 @@ const db =  mysql.createConnection({
     password: '',
     database: 'bodegamusicpro'
 })
+
+// ************** TODO LO RELACIONADO A PRODUCTOS******************
 //crear productos
 app.post('/create', (req, res) => {
     const name = req.body.name;
@@ -29,7 +31,7 @@ app.post('/create', (req, res) => {
     })
 })
 //listar productos
-app.get('/producto', (req, res) => {
+app.get('/apiV1', (req, res) => {
 
     db.query('SELECT * FROM product ', (err, result) => {
         if (err) {
@@ -70,6 +72,24 @@ app.delete('/delete/:id', (req, res) => {
         }
     })
 })
+
+//*************TODO LO RELACIONADO CON USUARIO ***********************
+app.post('/createUser', (req, res) => {
+    const name = req.body.name;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const password = req.body.password;
+    const birthDate = req.body.birthDate;
+
+    db.query('INSERT INTO user (name, , lastName, email, password, birthDate) VALUES (?,?,?,?,?)', [name, , lastName, email, password, birthDate], (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send('user values inserted')
+        }
+    })
+})
+
 
 app.listen(3001, () => {
     console.log('Server is running on port 3001')

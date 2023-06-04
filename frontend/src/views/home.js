@@ -18,7 +18,7 @@ const Home = () => {
   const [editar, setEditar] = useState(false);
 
   const [productList, setProductList] = useState([])
-//agregar producto
+//add product
   const addProduct = () => {
     Axios.post('http://localhost:3001/create', {
       name: name,
@@ -39,7 +39,7 @@ const Home = () => {
     })
   }
 
-//actualizar producto
+//update product
 const update = () => {
   Axios.put('http://localhost:3001/update', {
     id: id,
@@ -61,7 +61,7 @@ const update = () => {
   })
 }  
 
-//eliminar producto
+//delete product
 const eliminar = (val) => {
   
     Swal.fire({
@@ -99,7 +99,7 @@ const limpiarDatos = ()=>{
       setEditar(false);
 }
 
-//Modificar datos
+//change dates
 const editarProducto = (val) =>{
     setEditar(true);
     
@@ -111,7 +111,7 @@ const editarProducto = (val) =>{
     setId(val.id);
 }
 
-//traer productos
+//get product
   const getProducts = () => {
     Axios.get('http://localhost:3001/apiV1')
     .then((response) => {

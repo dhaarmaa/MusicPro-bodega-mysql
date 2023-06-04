@@ -1,3 +1,106 @@
-.register{
+body{
+    margin:0;
+    padding: 0;
+    background: url(../public/fondoLogin.jpg) no-repeat center top;
+    background-size: cover;
+    font-family: sans-serif;
+    height: 110vh;
+  }
+
+  .register {
+    width: 340px;
+    height: 660px;
+    background: #000000;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 120px 40px;
+  }
+  
+  .register .logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: calc(50% - 50px);
+  }
+  
+  .register h1 {
+    margin: 0;
+    padding: 0 0 20px;
     text-align: center;
-}
+    font-size: 22px;
+  }
+  
+  .register label {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+  }
+  
+  .register input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .register input[type="text"], .register input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  .register input[type="email"] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  .register input[type="date"] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .register input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #b20e21;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+  }
+  
+  .register input[type="submit"]:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+  }
+  
+  .register a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+  }
+  
+  .register a:hover {
+    color: #fff;
+  }

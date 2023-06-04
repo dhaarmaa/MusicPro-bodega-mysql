@@ -219,7 +219,8 @@ const apiSaldo = ()=>{
           }
         </div>
       </div>
-      <table className="table table-striped">
+      <div className="tableProduct">
+      <table className="table table-striped" >
             <thead>
           <tr>
             <th scope="col">Id</th>
@@ -263,6 +264,8 @@ const apiSaldo = ()=>{
           
         </tbody>
       </table>
+      </div>
+
     </div>
   );
 }

@@ -74,6 +74,8 @@ app.delete('/delete/:id', (req, res) => {
 })
 
 //*************TODO LO RELACIONADO CON USUARIO ***********************
+
+//inserción de usuarios
 app.post('/createUser', (req, res) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
@@ -89,6 +91,18 @@ app.post('/createUser', (req, res) => {
         }
     })
     
+})
+
+//traer usuarios
+app.get('/v1/user', (req, res) => {
+
+    db.query('SELECT * FROM user ', (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
 })
 
 

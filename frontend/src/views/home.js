@@ -160,7 +160,7 @@ const apiSaldo = ()=>{
       </div>
             <div className="card text-center">
         <div className="card-header">
-          Gestion
+          Gestion Bodega MusicPro
         </div>
         <div className="card-body">
           {/* campo nombre */}
@@ -220,9 +220,9 @@ const apiSaldo = ()=>{
         </div>
       </div>
       <table className="table table-striped">
-            <thead>
+        <thead>
           <tr>
-            <th scope="col">Id</th>
+            <th scope="col" className="custom-header">Id</th>
             <th scope="col">Nombre</th>
             <th scope="col">Codigo</th>
             <th scope="col">Descripcion</th>
@@ -242,6 +242,7 @@ const apiSaldo = ()=>{
                 <td>{val.description}</td>
                 <td>{val.price}</td>
                 <td>{val.stock}</td>
+
                 <td>
                 <div className="btn-group" role="group" aria-label="Basic example">
                 <button type="button" 
@@ -254,7 +255,7 @@ const apiSaldo = ()=>{
                   eliminar(val);
                 }}
                 className="btn btn-danger">Eliminar</button>
-              </div>
+                </div>
                 </td>
                 </tr>
             })

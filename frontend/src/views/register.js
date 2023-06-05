@@ -14,14 +14,10 @@ const Register = () => {
     const [birthDate, setBirthDate] = useState('');
     
     const addUser = () => {
+    
+      console.log(firstName, lastName, email, password, passwordConfirm, birthDate);
       if(password !== passwordConfirm){
-        Swal.fire({
-          title: "<strong>Error!!</strong>",
-          html: "<i>Las contraseñas no coinciden</i>",
-          icon: 'error',
-          timer:2500
-          
-        })
+        alert('Las contraseñas no coinciden')
       }else{
         Axios.post('http://localhost:3001/createUser', {
           firstName: firstName,
@@ -39,49 +35,53 @@ const Register = () => {
           })
         })
       }
-   
+
     }
+
+    
+
+
 
 
     return(
-      <div class="register">
+      <div className="register">
           <img className= 'logo' src="../logoWhite.svg" alt="" width="150"/>
           <h1>Registro Bodega</h1>
         
         <form>
           {/* ingreso del nombre */}
-            <label for="validationName" class="form-label">Nombre</label>
-            <input type="text" onChange={(event) => {setFirstName(event.target.value)}} class="form-control" value={firstName}  placeholder='Ingrese su nombre' id="validationName"  required/>        
+            <label  className="form-label">Nombre</label>
+            <input type="text" onChange={(event) => {setFirstName(event.target.value)}} className="form-control" value={firstName}  placeholder='Ingrese su nombre'   required/>        
           
           {/* ingreso del apellido */}
-            <label for="validationLastName" class="form-label">Apellido</label>
-            <input type="text" onChange={(event) => {setLastName(event.target.value)}} class="form-control" value={lastName} placeholder='Ingrese su apellido' id="validationCustom02"  required/>         
+            <label  className="form-label">Apellido</label>
+            <input type="text" onChange={(event) => {setLastName(event.target.value)}} className="form-control" value={lastName} placeholder='Ingrese su apellido'   required/>         
 
           {/* ingreso del correo */}
-            <label for="validationCustom03" class="form-label">Correo</label>
-            <input type="email" onChange={(event) => {setEmail(event.target.value)}} class="form-control" value={email} placeholder='Ingrese su correo' id="validationCustom03" required/>
-            <div class="invalid-feedback">
+            <label  className="form-label">Correo</label>
+            <input type="email" onChange={(event) => {setEmail(event.target.value)}} className="form-control" value={email} placeholder='Ingrese su correo'  required/>
+            {/* <div className="invalid-feedback">
               correo invalido
-            </div>
+            </div> */}
           
           {/* ingreso de la contraseña */}
-            <label for="validationCustom03" class="form-label">Contraseña</label>
-            <input type="password" onChange={(event) => {setPassword(event.target.value)}} class="form-control" value={password} placeholder='Ingrese su contraseña' id="validationCustom03" required/>
-            <div class="invalid-feedback">
+            <label  className="form-label">Contraseña</label>
+            <input type="password" onChange={(event) => {setPassword(event.target.value)}} className="form-control" value={password} placeholder='Ingrese su contraseña'  required/>
+            {/* <div className="invalid-feedback">
               contraseña invalida
-            </div>
+            </div> */}
           
           {/* ingreso de confirmación de contraseña */}
-            <label for="validationCustom03" class="form-label">Confirmación de contraseña</label>
-            <input type="password" onChange={(event) => {setPasswordConfirm(event.target.value)}} class="form-control" value={passwordConfirm} placeholder='Confirme su contraseña' id="validationCustom03" required/>
-            <div class="invalid-feedback">
+            <label  className="form-label">Confirmación de contraseña</label>
+            <input type="password" onChange={(event) => {setPasswordConfirm(event.target.value)}} className="form-control" value={passwordConfirm} placeholder='Confirme su contraseña'  required/>
+            {/* <div className="invalid-feedback">
               confirmación invalida
             </div>
-          
+           */}
 
           {/* ingreso de fecha de nacimiento */}
-            <label for="validationCustom05" class="form-label">Fecha de nacimiento</label>
-            <input type="date" onChange={(event) => {setBirthDate(event.target.value)}} class="form-control" value={birthDate} id="validationCustom05" required/>       
+            <label  className="form-label">Fecha de nacimiento</label>
+            <input type="date" onChange={(event) => {setBirthDate(event.target.value)}} className="form-control" value={birthDate} required/>       
 
 
           {/* boton de registro */}

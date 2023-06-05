@@ -81,13 +81,14 @@ app.post('/createUser', (req, res) => {
     const password = req.body.password;
     const birthDate = req.body.birthDate;
 
-    db.query('INSERT INTO user (firstName, lastName, email, password, birthDate) VALUES (?,?,?,?,?)', [firstName, , lastName, email, password, birthDate], (err, result) => {
+    db.query('INSERT INTO user (firstName, lastName, email, password, birthDate) VALUES (?,?,?,?,?)', [firstName, lastName, email, password, birthDate], (err, result) => {
         if (err) {
             console.log(err)
         } else {
             res.send('user values inserted')
         }
     })
+    
 })
 
 

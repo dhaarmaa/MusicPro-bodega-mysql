@@ -30,7 +30,7 @@ const Register = () => {
             title: "<strong>Registro Exitoso!!</strong>",
             html: "<i>Usuario <strong>"+ firstName +"</strong> fue registrado exitosamente!</i>",
             icon: 'success',
-            timer:2500
+            timer:4500
             
           })
         })
@@ -50,17 +50,6 @@ const Register = () => {
         
         <form>
           {/* ingreso del nombre */}
-            <label className="form-label">Nombre</label>
-            <input type="text" className="form-control" placeholder='Ingrese su nombre' id="validationName"  required/>        
-          
-          {/* ingreso del apellido */}
-            <label className="form-label">Apellido</label>
-            <input type="text" className="form-control" placeholder='Ingrese su apellido' id="validationCustom02"  required/>         
-
-          {/* ingreso del correo */}
-            <label className="form-label">Correo</label>
-            <input type="email" className="form-control" placeholder='Ingrese su correo' id="validationCustom03" required/>
-            <div className="invalid-feedback">
             <label  className="form-label">Nombre</label>
             <input type="text" onChange={(event) => {setFirstName(event.target.value)}} className="form-control" value={firstName}  placeholder='Ingrese su nombre'   required/>        
           
@@ -76,17 +65,6 @@ const Register = () => {
             </div> */}
           
           {/* ingreso de la contraseña */}
-            <label className="form-label">Contraseña</label>
-            <input type="password" className="form-control" placeholder='Ingrese su contraseña' id="validationCustom04" required/>
-            <div className="invalid-feedback">
-              contraseña invalido
-            </div>
-          
-          {/* ingreso de confirmación de contraseña */}
-            <label className="form-label">Confirmación de contraseña</label>
-            <input type="password" className="form-control" placeholder='Confirme su contraseña' id="validationCustom05" required/>
-            <div className="invalid-feedback">
-              contraseña invalido
             <label  className="form-label">Contraseña</label>
             <input type="password" onChange={(event) => {setPassword(event.target.value)}} className="form-control" value={password} placeholder='Ingrese su contraseña'  required/>
             {/* <div className="invalid-feedback">
@@ -102,8 +80,6 @@ const Register = () => {
            */}
 
           {/* ingreso de fecha de nacimiento */}
-            <label className="form-label">Fecha de nacimiento</label>
-            <input type="date" className="form-control" id="validationCustom06" required/>       
             <label  className="form-label">Fecha de nacimiento</label>
             <input type="date" onChange={(event) => {setBirthDate(event.target.value)}} className="form-control" value={birthDate} required/>       
 
@@ -113,7 +89,7 @@ const Register = () => {
         </form>
       </div>
    
-    )
+    )   
 }
 
 export default Register;

@@ -1,4 +1,3 @@
-
 import React, {useState , useEffect} from 'react';
 import Axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,7 +17,6 @@ const Home = () => {
   const [editar, setEditar] = useState(false);
 
   const [productList, setProductList] = useState([])
-}
 //add product
   const addProduct = () => {
     Axios.post('http://localhost:3001/create', {
@@ -161,7 +159,7 @@ const apiSaldo = ()=>{
       </div>
             <div className="card text-center">
         <div className="card-header">
-          Gestion Bodega MusicPro
+          Gestion
         </div>
         <div className="card-body">
           {/* campo nombre */}
@@ -224,7 +222,7 @@ const apiSaldo = ()=>{
       <table className="table table-striped" >
             <thead>
           <tr>
-            <th scope="col" className="custom-header">Id</th>
+            <th scope="col">Id</th>
             <th scope="col">Nombre</th>
             <th scope="col">Codigo</th>
             <th scope="col">Descripcion</th>
@@ -238,13 +236,12 @@ const apiSaldo = ()=>{
           {
             productList.map((val, key) => {
               return <tr key={val.id}>
-                <th scope="row" className="custom-header">{val.id}</th>
+                <th scope="row">{val.id}</th>
                 <td>{val.name}</td>
                 <td>{val.code}</td>
                 <td>{val.description}</td>
                 <td>{val.price}</td>
                 <td>{val.stock}</td>
-
                 <td>
                 <div className="btn-group" role="group" aria-label="Basic example">
                 <button type="button" 
@@ -257,7 +254,7 @@ const apiSaldo = ()=>{
                   eliminar(val);
                 }}
                 className="btn btn-danger">Eliminar</button>
-                </div>
+              </div>
                 </td>
                 </tr>
             })
@@ -266,9 +263,10 @@ const apiSaldo = ()=>{
           
         </tbody>
       </table>
+      </div>
+
     </div>
-  )
-  
+  );
 }
 
 export default Home;

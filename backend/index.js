@@ -2,6 +2,8 @@ const express =  require('express')
 const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
+const url = require('url');
+
 
 app.use(cors());
 app.use(express.json());
@@ -104,6 +106,36 @@ app.get('/v1/user', (req, res) => {
         }
     })
 })
+
+// Comparar datos del usuario en la BD
+app.post('/compareData', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+  
+    db.query('SELECT * FROM user WHERE email = ? AND password = ?', [email, password], (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json({ success: false, message: 'Error en el servidor' });
+      } else {
+        if (result.length > 0) {
+          // Los datos coinciden, usuario autenticado
+        //   const redirectUrl = url.format({
+        //     pathname: '/', // Reemplaza '/otra-pagina' con la URL de la página a la que deseas redirigir al usuario
+        //     query: {
+        //       userId: result[0].id, // Puedes pasar cualquier parámetro adicional que necesites a través de la URL
+        //     },
+        //   });
+          
+          res.status(200).json({ success: true, message: 'Datos coinciden'});
+          
+        } else {
+          // Los datos no coinciden, usuario no autenticado
+          res.status(401).json({ success: false, message: 'Datos no coinciden' });
+        }
+      }
+    });
+  });
+  
 
 
 app.listen(3001, () => {

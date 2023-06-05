@@ -14,7 +14,7 @@ const Login = () => {
     //get user
     const getUser = (event) => {
         event.preventDefault();
-        Axios.post('http://localhost:3001/compareData', { username: email, password })
+        Axios.post('http://localhost:3001/compareData', { email: email, password: password })
         .then((response) => {
             if (response.data.success) {
             // Los datos coinciden, realiza las acciones correspondientes

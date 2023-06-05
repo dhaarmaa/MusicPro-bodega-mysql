@@ -18,6 +18,7 @@ const Home = () => {
   const [editar, setEditar] = useState(false);
 
   const [productList, setProductList] = useState([])
+}
 //add product
   const addProduct = () => {
     Axios.post('http://localhost:3001/create', {
@@ -219,8 +220,9 @@ const apiSaldo = ()=>{
           }
         </div>
       </div>
-      <table className="table table-striped">
-        <thead>
+      <div className="tableProduct">
+      <table className="table table-striped" >
+            <thead>
           <tr>
             <th scope="col" className="custom-header">Id</th>
             <th scope="col">Nombre</th>
@@ -236,7 +238,7 @@ const apiSaldo = ()=>{
           {
             productList.map((val, key) => {
               return <tr key={val.id}>
-                <th scope="row">{val.id}</th>
+                <th scope="row" className="custom-header">{val.id}</th>
                 <td>{val.name}</td>
                 <td>{val.code}</td>
                 <td>{val.description}</td>
@@ -265,7 +267,8 @@ const apiSaldo = ()=>{
         </tbody>
       </table>
     </div>
-  );
+  )
+  
 }
 
 export default Home;

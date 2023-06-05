@@ -75,19 +75,20 @@ app.delete('/delete/:id', (req, res) => {
 
 //*************TODO LO RELACIONADO CON USUARIO ***********************
 app.post('/createUser', (req, res) => {
-    const name = req.body.name;
+    const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const email = req.body.email;
     const password = req.body.password;
     const birthDate = req.body.birthDate;
 
-    db.query('INSERT INTO user (name, , lastName, email, password, birthDate) VALUES (?,?,?,?,?)', [name, , lastName, email, password, birthDate], (err, result) => {
+    db.query('INSERT INTO user (firstName, lastName, email, password, birthDate) VALUES (?,?,?,?,?)', [firstName, lastName, email, password, birthDate], (err, result) => {
         if (err) {
             console.log(err)
         } else {
             res.send('user values inserted')
         }
     })
+    
 })
 
 

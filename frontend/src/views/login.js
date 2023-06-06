@@ -60,8 +60,8 @@ const Login = () => {
                         {/* boton de login */}
                         <input type="submit" onClick={getUser} value="Ingresar"/>
                         <a href ='' onClick={() =>{
-                            navigate('/registro');
-                        }}>¿No tienes cuenta? Registrate aqui</a>
+                            navigate('/registro');}}
+                        >¿No tienes cuenta? Registrate aqui</a>
                     </form>
                     
                 </div>    

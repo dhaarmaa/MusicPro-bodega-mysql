@@ -107,7 +107,7 @@ app.get('/v1/user', (req, res) => {
     })
 })
 
-// Comparar datos del usuario en la BD
+// Comparar datos de usuario en la BD
 app.post('/compareData', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;

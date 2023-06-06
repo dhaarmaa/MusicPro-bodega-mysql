@@ -1,7 +1,7 @@
 import React, {useState , useEffect} from 'react';
 import Axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 
 
@@ -219,7 +219,7 @@ const apiSaldo = ()=>{
         </div>
       </div>
       <div className="tableProduct">
-      <table className="table table-striped" >
+      <table className="table table-light">
             <thead>
           <tr>
             <th scope="col">Id</th>

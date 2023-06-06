@@ -12,6 +12,15 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [birthDate, setBirthDate] = useState('');
+
+    const limpiarDatos = () => {
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setPassword('');
+      setPasswordConfirm('');
+      setBirthDate('');
+    }
     
     const addUser = () => {
     
@@ -37,11 +46,6 @@ const Register = () => {
       }
 
     }
-
-    
-
-
-
 
     return(
       <div className="register">
@@ -85,7 +89,7 @@ const Register = () => {
 
 
           {/* boton de registro */}
-            <input type="submit" onClick={addUser} value="Registrarme"/>
+            <input type="submit" onClick={addUser} onSubmit={limpiarDatos} value="Registrarme"/>
         </form>
       </div>
    

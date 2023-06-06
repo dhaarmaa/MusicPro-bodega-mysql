@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../login.css';
 import Axios from 'axios';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -9,12 +9,12 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const navigate = useNavigate();
 
     //get user
     const getUser = (event) => {
         event.preventDefault();
-        Axios.post('http://localhost:3001/compareData', { username: email, password })
+        Axios.post('http://localhost:3001/compareData', { email: email, password: password })
         .then((response) => {
             if (response.data.success) {
             // Los datos coinciden, realiza las acciones correspondientes
@@ -59,7 +59,11 @@ const Login = () => {
 
                         {/* boton de login */}
                         <input type="submit" onClick={getUser} value="Ingresar"/>
+                        <a href ='' onClick={() =>{
+                            navigate('/registro');
+                        }}>¿No tienes cuenta? Registrate aqui</a>
                     </form>
+                    
                 </div>    
             
             </div>

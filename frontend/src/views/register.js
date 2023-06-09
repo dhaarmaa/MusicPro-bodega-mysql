@@ -25,8 +25,23 @@ const Register = () => {
     const addUser = () => {
     
       console.log(firstName, lastName, email, password, passwordConfirm, birthDate);
+
       if(password !== passwordConfirm){
-        alert('Las contraseñas no coinciden')
+         
+        Swal.fire(
+          'contraseñas no coinciden',
+          'por favor ingrese nuevamente la contraseña',
+          'error'
+        )
+
+      // }if (firstName.length <3  ) {
+      //   alert('Por favor ingrese un nombre valido')
+         
+      // }if (lastName.length <3 ) {
+      //   alert('Por favor ingrese un apellido valido')
+         
+      // }if (password.length < 6) {
+      //   alert('Por favor ingrese una contraseña de minimo 6 caracteres')
       }else{
         Axios.post('http://localhost:3001/createUser', {
           firstName: firstName,
@@ -35,13 +50,12 @@ const Register = () => {
           password: password,
           birthDate: birthDate
         }).then(() => {
-          Swal.fire({
-            title: "<strong>Registro Exitoso!!</strong>",
-            html: "<i>Usuario <strong>"+ firstName +"</strong> fue registrado exitosamente!</i>",
-            icon: 'success',
-            timer:4500
-            
-          })
+        
+          Swal.fire(
+            'registro exitoso!',
+            'bievenido a la familia de bodega',
+            'success'
+          )
         })
       }
 
@@ -89,7 +103,8 @@ const Register = () => {
 
 
           {/* boton de registro */}
-            <input type="submit" onClick={addUser} onSubmit={limpiarDatos} value="Registrarme"/>
+            <input type="submit" onClick={addUser}  value="Registrarme"/>
+            {/* onSubmit={limpiarDatos} */}
         </form>
       </div>
    

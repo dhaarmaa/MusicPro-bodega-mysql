@@ -8,9 +8,9 @@ import Home from './views/home';
 const Router = () => (
     <BrowserRouter>
         <Routes>  
-            <Route path='/' element={<Home/>} /> 
+            <Route path='/home' element={<Home/>} /> 
             <Route path='/registro' element={<Register/>} />
-            <Route path="/login" element={<Login/>} />
+            <Route path="/" element={<Login/>} />
 
             <Route path="*" element={<div>404</div> } />
         </Routes>

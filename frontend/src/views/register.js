@@ -34,14 +34,7 @@ const Register = () => {
           'error'
         )
 
-      // }if (firstName.length <3  ) {
-      //   alert('Por favor ingrese un nombre valido')
-         
-      // }if (lastName.length <3 ) {
-      //   alert('Por favor ingrese un apellido valido')
-         
-      // }if (password.length < 6) {
-      //   alert('Por favor ingrese una contraseña de minimo 6 caracteres')
+
       }else{
         Axios.post('http://localhost:3001/createUser', {
           firstName: firstName,
@@ -53,7 +46,7 @@ const Register = () => {
         
           Swal.fire(
             'registro exitoso!',
-            'bievenido a la familia de bodega',
+            'bievenido a la familia de bodega MusicPro',
             'success'
           )
         })
@@ -69,7 +62,7 @@ const Register = () => {
         <form>
           {/* ingreso del nombre */}
             <label  className="form-label">Nombre</label>
-            <input type="text" onChange={(event) => {setFirstName(event.target.value)}} className="form-control" value={firstName}  placeholder='Ingrese su nombre'   required/>        
+            <input type="text" onChange={(event) => {setFirstName(event.target.value)}} className="form-control" value={firstName}  placeholder='Ingrese su nombre' minLength='3' maxLength='50' required/>        
           
           {/* ingreso del apellido */}
             <label  className="form-label">Apellido</label>
@@ -77,7 +70,7 @@ const Register = () => {
 
           {/* ingreso del correo */}
             <label  className="form-label">Correo</label>
-            <input type="email" onChange={(event) => {setEmail(event.target.value)}} className="form-control" value={email} placeholder='Ingrese su correo'  required/>
+            <input type="email" onChange={(event) => {setEmail(event.target.value)}} className="form-control" value={email} placeholder='Ingrese su correo' required/>
             {/* <div className="invalid-feedback">
               correo invalido
             </div> */}
@@ -98,13 +91,20 @@ const Register = () => {
            */}
 
           {/* ingreso de fecha de nacimiento */}
-            <label  className="form-label">Fecha de nacimiento</label>
-            <input type="date" onChange={(event) => {setBirthDate(event.target.value)}} className="form-control" value={birthDate} required/>       
+            <label for="datemin" className="form-label">Fecha de nacimiento</label>
+            
+            <input 
+            type="date" 
+            onChange={(event) => {setBirthDate(event.target.value)}} 
+            className="form-control" 
+            value={birthDate} 
+            max="2000-01-01" 
+            id="datemin" required/>       
 
 
           {/* boton de registro */}
-            <input type="submit" onClick={addUser}  value="Registrarme"/>
-            {/* onSubmit={limpiarDatos} */}
+            <input type="submit" onClick={addUser} onSubmit={limpiarDatos} value="Registrarme"/>
+       
         </form>
       </div>
    

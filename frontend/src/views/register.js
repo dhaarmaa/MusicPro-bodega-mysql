@@ -21,10 +21,14 @@ const Register = () => {
       setPasswordConfirm('');
       setBirthDate('');
     }
-    
+
     const addUser = () => {
+      
     
       console.log(firstName, lastName, email, password, passwordConfirm, birthDate);
+      const date = new Date(birthDate)
+      const year = date.getFullYear();
+      console.log(year);  
 
       if(password !== passwordConfirm){
          
@@ -35,7 +39,16 @@ const Register = () => {
         )
 
 
-      }else{
+      }
+      if(year > 2005){
+        Swal.fire(
+          'fecha de nacimiento invalida',
+          'por favor ingrese nuevamente la fecha de nacimiento',
+          'error'
+        )
+      }
+      else{
+        
         Axios.post('http://localhost:3001/createUser', {
           firstName: firstName,
           lastName: lastName,
@@ -70,7 +83,7 @@ const Register = () => {
 
           {/* ingreso del correo */}
             <label  className="form-label">Correo</label>
-            <input type="email" onChange={(event) => {setEmail(event.target.value)}} className="form-control" value={email} placeholder='Ingrese su correo' required/>
+            <input type="email" onChange={(event) => {setEmail(event.target.value)}} className="form-control" value={email} placeholder='Ingrese su correo' pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required/>
             {/* <div className="invalid-feedback">
               correo invalido
             </div> */}
@@ -90,16 +103,17 @@ const Register = () => {
             </div>
            */}
 
-          {/* ingreso de fecha de nacimiento */}
-            <label for="datemin" className="form-label">Fecha de nacimiento</label>
+          {/* ingreso de fecha de nacimiento  */}
+            <label  className="form-label">Fecha de nacimiento</label>
             
             <input 
-            type="date" 
-            onChange={(event) => {setBirthDate(event.target.value)}} 
-            className="form-control" 
-            value={birthDate} 
-            max="2000-01-01" 
-            id="datemin" required/>       
+            type="date" onChange={(event) => {setBirthDate(event.target.value)}} className="form-control" value={birthDate} required/>       
+            {/* <label for="start">Fecha de nacimineto</label>
+
+            <input type="date" id="start" name="trip-start"
+              value={birthDate} 
+              
+              onChange={(event) => {setBirthDate(event.target.value)}} ></input> */}
 
 
           {/* boton de registro */}

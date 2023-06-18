@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import '../register.css';
 import Axios from 'axios';
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
 
 
 const Register = () => {
@@ -12,6 +13,8 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [birthDate, setBirthDate] = useState('');
+    // const [validateUser, setValidateUser] = useState(false);
+    const navigate = useNavigate();
 
     const limpiarDatos = () => {
       setFirstName('');
@@ -22,47 +25,66 @@ const Register = () => {
       setBirthDate('');
     }
 
-    const addUser = () => {
-      
     
+    const addUser = () => {
       console.log(firstName, lastName, email, password, passwordConfirm, birthDate);
-      const date = new Date(birthDate)
+      const date = new Date(birthDate);
       const year = date.getFullYear();
-      console.log(year);  
-
-      if(password !== passwordConfirm){
-         
+      console.log(year);
+  
+      if (password !== passwordConfirm) {
         Swal.fire(
-          'contraseñas no coinciden',
-          'por favor ingrese nuevamente la contraseña',
+          'Contraseñas no coinciden', 
+          'Por favor ingrese nuevamente la contraseña', 
           'error'
-        )
-
-
-      }
-      if(year > 2005){
+          );
+      } else if (year > 2005) {
         Swal.fire(
-          'fecha de nacimiento invalida',
-          'por favor ingrese nuevamente la fecha de nacimiento',
+          'Fecha de nacimiento inválida', 
+          'Por favor ingrese nuevamente la fecha de nacimiento', 
           'error'
-        )
-      }
-      else{
-        
-        Axios.post('http://localhost:3001/createUser', {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-          birthDate: birthDate
-        }).then(() => {
-        
-          Swal.fire(
-            'registro exitoso!',
-            'bievenido a la familia de bodega MusicPro',
-            'success'
-          )
-        })
+          );
+      } else if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(email) === false){
+        Swal.fire(
+          'Correo inválido', 
+          'Por favor ingrese nuevamente el correo', 
+          'error'
+          );
+
+      }else {
+
+        Axios.post('http://localhost:3001/compareDataRegister',{email: email})
+        .then((response) => {
+          if (response.data.success) {
+            // Los datos coinciden, realiza las acciones correspondientes
+            console.log('Datos coinciden');
+            Swal.fire(
+              'Usuario ya registrado', 
+              'Por favor ingrese un correo diferente', 
+              'error'
+            );
+            
+          } else {
+            // Los datos no coinciden, realiza las acciones correspondientes
+            console.log('Datos no coinciden');
+            Axios.post('http://localhost:3001/createUser', {
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              password: password,
+              birthDate: birthDate
+            }).then(() => {
+            
+              Swal.fire(
+                'registro exitoso!',
+                'bievenido a la familia de bodega MusicPro',
+                'success'
+              )
+            })
+            window.location.href = "/home";
+
+          }
+        })        
       }
 
     }
@@ -83,7 +105,7 @@ const Register = () => {
 
           {/* ingreso del correo */}
             <label  className="form-label">Correo</label>
-            <input type="email" onChange={(event) => {setEmail(event.target.value)}} className="form-control" value={email} placeholder='Ingrese su correo' pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required/>
+            <input type="email" onChange={(event) => {setEmail(event.target.value)}} className="form-control" value={email} placeholder='Ingrese su correo' required/>
             {/* <div className="invalid-feedback">
               correo invalido
             </div> */}
@@ -118,6 +140,7 @@ const Register = () => {
 
           {/* boton de registro */}
             <input type="submit" onClick={addUser} onSubmit={limpiarDatos} value="Registrarme"/>
+            <a href ='' onClick={() =>{navigate('/');}}>¿Ya tienes cuenta? Inicia sesión aqui</a>
        
         </form>
       </div>

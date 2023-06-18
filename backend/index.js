@@ -140,6 +140,34 @@ app.post('/compareData', (req, res) => {
         console.log(error);
     }
   });
+
+  //Comparar datos de usuario en la BD para registro
+  // Comparar datos de usuario en la BD
+app.post('/compareDataRegister', (req, res) => {
+    const email = req.body.email;
+    console.log('data',req.body.email);
+    try {
+        db.query('SELECT * FROM user WHERE email = ? ', [email], (err, result) => {
+          if (err) {
+            console.log(err);
+            res.status(500).json({ success: false, message: 'Error en el servidor' });
+          } else {
+              console.log(result);
+            if (result.length > 0) {
+                // Los datos coinciden, usuario autenticado
+              res.status(200).json({ success: true, message: 'Datos coinciden'});
+              
+            } else {
+              // Los datos no coinciden, usuario no autenticado
+              res.status(401).json({ success: false, message: 'Datos no coinciden' });
+            }
+          }
+        });
+        
+    } catch (error) {
+        console.log(error);
+    }
+  });
   
 
 

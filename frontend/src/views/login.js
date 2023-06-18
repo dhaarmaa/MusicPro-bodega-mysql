@@ -19,9 +19,7 @@ const Login = () => {
             if (response.data.success) {
             // Los datos coinciden, realiza las acciones correspondientes
             console.log('Datos coinciden');
-            // const redirectUrl = response.data.redirectUrl;
-            // window.location.href = redirectUrl;
-            window.location.href = "/";
+            window.location.href = "/home";
             } else {
             // Los datos no coinciden, realiza las acciones correspondientes
             console.log('Datos no coinciden');
@@ -33,10 +31,7 @@ const Login = () => {
         });
     }
 
-    // //redirect
-    // if (redirect) {
-    //     return <Navigate to="/" />;
-    // }
+
 
 
     return(

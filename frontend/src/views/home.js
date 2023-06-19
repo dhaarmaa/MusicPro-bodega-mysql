@@ -2,6 +2,7 @@ import React, {useState , useEffect} from 'react';
 import Axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -13,6 +14,7 @@ const Home = () => {
   const [price, setPrice] = useState();
   const [stock, setStock] = useState();
   const [id, setId] = useState(0);
+  const navigate = useNavigate();
 
   const [editar, setEditar] = useState(false);
 
@@ -153,54 +155,71 @@ const apiSaldo = ()=>{
   return (
     <div className="container">
       <div className="App">
+      <nav className="navbar bg-dark bg-body-tertiary">
+        <div className="container-fluid">
+        
+        <a className="navbar-brand text-light" ><img src="logoWhite.svg" alt="Bootstrap" width="60" height="60"/> Familia Bodega </a>
+        
 
+        <form className="d-flex " >
+         <li>
+         <a href ='' onClick={() =>{navigate('/integration');}} className="text-light">
+        Transporte</a>
+      </li>
+      <li>
+          <a href ='' onClick={() =>{navigate('/');}} className="text-light">Salir</a>
+      </li>
+        </form>
+      </div>
+    </nav>
+<br />
 
 
       </div>
-            <div className="card text-center">
+            <div className="card text-center text-light bg-dark">
         <div className="card-header">
           Gestion
         </div>
         <div className="card-body">
           {/* campo nombre */}
           <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Nombre</span>
+            <span className="input-group-text bg-dark text-light" id="basic-addon1">Nombre</span>
             <input type="text"
             onChange={(event) => {setName(event.target.value)}} 
-            className="form-control" value={name} placeholder="Ingrese Nombre del Producto" aria-label="Username" aria-describedby="basic-addon1"/>
+            className="form-control bg-dark text-light" value={name} placeholder="Ingrese Nombre del Producto" aria-label="Username" aria-describedby="basic-addon1"/>
           </div>
 
           {/* campo codigo */}
           <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Codigo</span>
+            <span className="input-group-text bg-dark text-light" id="basic-addon1">Codigo</span>
             <input type="text"
             onChange={(event) => {setCode(event.target.value)}}
-            className="form-control" value={code} placeholder="Ingrese Codigo del Producto" aria-label="Username" aria-describedby="basic-addon1"/>
+            className="form-control bg-dark text-light" value={code} placeholder="Ingrese Codigo del Producto" aria-label="Username" aria-describedby="basic-addon1"/>
           </div>
 
           {/* campo descripcion */}
           <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Descripcion</span>
+            <span className="input-group-text bg-dark text-light" id="basic-addon1">Descripcion</span>
             <input type="text"
             onChange={(event) => {setDescription(event.target.value)}}
-            className="form-control" value={description} placeholder="Ingrese Descripcion del Producto" aria-label="Username" aria-describedby="basic-addon1"/>
+            className="form-control bg-dark text-light" value={description} placeholder="Ingrese Descripcion del Producto" aria-label="Username" aria-describedby="basic-addon1"/>
           </div>
 
           {/* campo precio */}
           <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Precio</span>
+            <span className="input-group-text bg-dark text-light" id="basic-addon1">Precio</span>
             <input type="number"
             onChange={(event) => {setPrice(event.target.value)}}
-            className="form-control" value={price} placeholder="Ingrese Precio del Producto" aria-label="Username" aria-describedby="basic-addon1"/>
+            className="form-control bg-dark text-light" value={price} placeholder="Ingrese Precio del Producto" aria-label="Username" aria-describedby="basic-addon1"/>
           </div>
 
 
           {/* campo stock */}
           <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Stock</span>
+            <span className="input-group-text bg-dark text-light" id="basic-addon1">Stock</span>
             <input type="number"
             onChange={(event) => {setStock(event.target.value)}}
-            className="form-control" value={stock} placeholder="Ingrese Stock del Producto" aria-label="Username" aria-describedby="basic-addon1"/>
+            className="form-control bg-dark text-light" value={stock} placeholder="Ingrese Stock del Producto" aria-label="Username" aria-describedby="basic-addon1"/>
           </div>
 
 
@@ -214,12 +233,12 @@ const apiSaldo = ()=>{
             <button className = "btn btn-warning m-2" onClick={update}>Actualizar</button>
             <button className = "btn btn-danger m-2" onClick={limpiarDatos}>Cancelar</button>
             </div>
-            :<button className = "btn btn-dark" onClick={addProduct}>Ingresar producto</button>
+            :<button className = "btn btn-dark border-light" onClick={addProduct}>Ingresar producto</button>
           }
         </div>
       </div>
       <div className="tableProduct">
-      <table className="table table-light">
+      <table className="table table-dark">
             <thead>
           <tr>
             <th scope="col">Id</th>

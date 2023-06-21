@@ -44,18 +44,29 @@ const Register = () => {
           'Por favor ingrese nuevamente la fecha de nacimiento', 
           'error'
           );
-      } else if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(email) === false){
+      } 
+      // else if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(email) === false){
+      //   Swal.fire(
+      //     'Correo inválido', 
+      //     'Por favor ingrese nuevamente el correo', 
+      //     'error'
+      //     );
+
+      // }
+      else if(firstName === '' || lastName === '' || email === '' || password === '' || passwordConfirm === '' || birthDate === ''){
         Swal.fire(
-          'Correo inválido', 
-          'Por favor ingrese nuevamente el correo', 
+          'Campos vacíos', 
+          'Por favor ingrese todos los datos', 
           'error'
           );
+      }
 
-      }else {
+      
+      else {
 
-        Axios.post('http://localhost:3001/compareDataRegister',{email: email})
+        Axios.post('http://localhost:3001/compareData', { email: email, password: password })
         .then((response) => {
-          if (response.data.success) {
+            if (response.data.success) {
             // Los datos coinciden, realiza las acciones correspondientes
             console.log('Datos coinciden');
             Swal.fire(
@@ -64,7 +75,8 @@ const Register = () => {
               'error'
             );
             
-          } else {
+            
+            } else {
             // Los datos no coinciden, realiza las acciones correspondientes
             console.log('Datos no coinciden');
             Axios.post('http://localhost:3001/createUser', {
@@ -81,11 +93,62 @@ const Register = () => {
                 'success'
               )
             })
-            window.location.href = "/home";
+            // window.location.href = "/home";
+            navigate('/home')
 
           }
-        })        
+        })
+       
+        .catch((error) => {
+        // Maneja el error de la solicitud
+        console.log(error);
+        });
+
       }
+
+
+
+
+
+
+      //   Axios.post('http://localhost:3001/compareDataRegister',{email: email})
+      //   .then((response) => {
+      //     if (response.data.success) {
+      //       // Los datos coinciden, realiza las acciones correspondientes
+      //       console.log('Datos coinciden');
+      //       Swal.fire(
+      //         'Usuario ya registrado', 
+      //         'Por favor ingrese un correo diferente', 
+      //         'error'
+      //       );
+            
+      //     } else {
+      //       // Los datos no coinciden, realiza las acciones correspondientes
+      //       console.log('Datos no coinciden');
+      //       Axios.post('http://localhost:3001/createUser', {
+      //         firstName: firstName,
+      //         lastName: lastName,
+      //         email: email,
+      //         password: password,
+      //         birthDate: birthDate
+      //       }).then(() => {
+            
+      //         Swal.fire(
+      //           'registro exitoso!',
+      //           'bievenido a la familia de bodega MusicPro',
+      //           'success'
+      //         )
+      //       })
+      //       // window.location.href = "/home";
+      //       navigate('/home')
+
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     // Maneja el error de la solicitud
+      //     console.log(error);
+      //     });       
+      // }
 
     }
 

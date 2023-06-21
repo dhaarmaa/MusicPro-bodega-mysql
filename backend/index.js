@@ -145,7 +145,7 @@ app.post('/compareData', (req, res) => {
   // Comparar datos de usuario en la BD
 app.post('/compareDataRegister', (req, res) => {
     const email = req.body.email;
-    console.log('data',req.body.email);
+    console.log('data', req.body.email);
     try {
         db.query('SELECT * FROM user WHERE email = ? ', [email], (err, result) => {
           if (err) {

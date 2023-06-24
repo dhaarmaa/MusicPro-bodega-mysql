@@ -1,8 +1,62 @@
+/** 
+ * @swagger
+ * components:
+ *  schemas:
+ *     Product:
+ *          type: object
+ *          required:
+ *            - name
+ *            - code
+ *            - description
+ *            - price
+ *            - stock
+ *          properties:
+ *            id:
+ *              type: integer
+ *              description: El id del producto
+ *            name:
+ *              type: string
+ *              description: El nombre del producto
+ *            code:
+ *              type: string
+ *              description: El codigo del producto
+ *            description:
+ *              type: string
+ *              description: La descripcion del producto
+ *            price:
+ *              type: integer
+ *              description: El precio del producto
+ *            stock:
+ *              type: integer
+ *              description: El stock del producto
+*/
+
+/**
+ * @swagger
+ * tags:
+ *   name: Product
+ *   description: Product management
+ * /apiV1:
+ *   get:
+ *     summary: Returns the list of all the products
+ *     tags: [Product]
+ *     responses:
+ *       200:
+ *         description: The list of the products
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
+*/
 const express =  require('express')
 const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
 const url = require('url');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 
 app.use(cors());
@@ -169,6 +223,39 @@ app.post('/compareDataRegister', (req, res) => {
     }
   });
   
+
+
+  //*************TODO LO RELACIONADO CON SWAGGER***********************
+
+
+const options = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "MusicPro API Docs Bodega",
+            version: "1.0.0",
+            description: "MusicPro API Information",
+            contact: {
+                name: "Teen Titans",
+                url: "https://TeenTitans.win",
+                email: "info@email.com",
+            },
+        },
+        servers: [
+            {
+                url: "http://localhost:3001",
+            },
+        ],
+    },
+    apis: ["./index.js"],
+}
+
+const spacs= swaggerJsDoc(options);
+app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(spacs)
+);
 
 
 app.listen(3001, () => {

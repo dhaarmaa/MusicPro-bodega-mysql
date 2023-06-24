@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../register.css';
 import Axios from 'axios';
 import Swal from 'sweetalert2'
@@ -14,8 +14,13 @@ const Register = () => {
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [birthDate, setBirthDate] = useState('');
     // const [validateUser, setValidateUser] = useState(false);
+    const [validateEmail, setValidateEmail] = useState(0);
+    const [emailList, setEmailList] = useState([]);
+    //const [userList, setUserList] = useState([]);
+    
     const navigate = useNavigate();
 
+    //funcion para limpiar los datos del formulario
     const limpiarDatos = () => {
       setFirstName('');
       setLastName('');
@@ -23,36 +28,62 @@ const Register = () => {
       setPassword('');
       setPasswordConfirm('');
       setBirthDate('');
-    }
+    }  
+    //funcion para obtener y comparar los correos de la base de datos
+    const getEmail = () => {
+      Axios.get('http://localhost:3001/v1/user')
+        .then((res) => {
+          const userList = res.data;
+          const emailList = userList.map((val) => val.email);
+          if(emailList.includes(email)) {
+            //console.log('correo ya registrado');
+            setValidateEmail(1)
+          }
+          else{
+            //console.log('correo no registrado');
+            setValidateEmail(2)
+          }
+        })
+        .catch((err)=>{
+          console.log(err);
+        });
+          //console.log(emailList);
+
+         
+        };
+
+        useEffect(() => {
+          getEmail();
+        }, [email]);
 
     
-    const addUser = () => {
+    const addUser = (event) => {
+      event.preventDefault();
+
       console.log(firstName, lastName, email, password, passwordConfirm, birthDate);
+
+      //para poder validar la fecha de nacimiento
       const date = new Date(birthDate);
       const year = date.getFullYear();
-      console.log(year);
+      //console.log(year);
   
+      //para validar que las contraseñas sean iguales
       if (password !== passwordConfirm) {
         Swal.fire(
           'Contraseñas no coinciden', 
           'Por favor ingrese nuevamente la contraseña', 
           'error'
           );
-      } else if (year > 2005) {
+      } 
+      //para validar que la fecha de nacimiento sea mayor a 2005
+      else if (year > 2005) {
         Swal.fire(
           'Fecha de nacimiento inválida', 
           'Por favor ingrese nuevamente la fecha de nacimiento', 
           'error'
           );
       } 
-      // else if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(email) === false){
-      //   Swal.fire(
-      //     'Correo inválido', 
-      //     'Por favor ingrese nuevamente el correo', 
-      //     'error'
-      //     );
-
-      // }
+      //para validar que todos los campos esten llenos
       else if(firstName === '' || lastName === '' || email === '' || password === '' || passwordConfirm === '' || birthDate === ''){
         Swal.fire(
           'Campos vacíos', 
@@ -61,96 +92,34 @@ const Register = () => {
           );
       }
 
-      
+      else if (validateEmail === 1){
+        Swal.fire(
+          'Usuario ya registrado', 
+          'Por favor ingrese otro correo', 
+          'error'
+          );
+          navigate('/registro')
+      }   
       else {
 
-        Axios.post('http://localhost:3001/compareData', { email: email, password: password })
-        .then((response) => {
-            if (response.data.success) {
-            // Los datos coinciden, realiza las acciones correspondientes
-            console.log('Datos coinciden');
-            Swal.fire(
-              'Usuario ya registrado', 
-              'Por favor ingrese un correo diferente', 
-              'error'
-            );
-            
-            
-            } else {
-            // Los datos no coinciden, realiza las acciones correspondientes
-            console.log('Datos no coinciden');
-            Axios.post('http://localhost:3001/createUser', {
-              firstName: firstName,
-              lastName: lastName,
-              email: email,
-              password: password,
-              birthDate: birthDate
-            }).then(() => {
-            
-              Swal.fire(
-                'registro exitoso!',
-                'bievenido a la familia de bodega MusicPro',
-                'success'
-              )
-            })
-            // window.location.href = "/home";
-            navigate('/home')
-
-          }
+        Axios.post('http://localhost:3001/createUser', {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+          birthDate: birthDate
+        }).then(() => {
+        
+          Swal.fire(
+            'registro exitoso!',
+            'bievenido a la familia de bodega MusicPro',
+            'success'
+          )
         })
+        navigate('/home')
+       }
        
-        .catch((error) => {
-        // Maneja el error de la solicitud
-        console.log(error);
-        });
-
-      }
-
-
-
-
-
-
-      //   Axios.post('http://localhost:3001/compareDataRegister',{email: email})
-      //   .then((response) => {
-      //     if (response.data.success) {
-      //       // Los datos coinciden, realiza las acciones correspondientes
-      //       console.log('Datos coinciden');
-      //       Swal.fire(
-      //         'Usuario ya registrado', 
-      //         'Por favor ingrese un correo diferente', 
-      //         'error'
-      //       );
-            
-      //     } else {
-      //       // Los datos no coinciden, realiza las acciones correspondientes
-      //       console.log('Datos no coinciden');
-      //       Axios.post('http://localhost:3001/createUser', {
-      //         firstName: firstName,
-      //         lastName: lastName,
-      //         email: email,
-      //         password: password,
-      //         birthDate: birthDate
-      //       }).then(() => {
-            
-      //         Swal.fire(
-      //           'registro exitoso!',
-      //           'bievenido a la familia de bodega MusicPro',
-      //           'success'
-      //         )
-      //       })
-      //       // window.location.href = "/home";
-      //       navigate('/home')
-
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     // Maneja el error de la solicitud
-      //     console.log(error);
-      //     });       
-      // }
-
-    }
+        }
 
     return(
       <div className="register">

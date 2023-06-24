@@ -124,7 +124,7 @@ const editarProducto = (val) =>{
     getProducts();
     apiSaludo();
     apiSaldo();
-  }, []);
+  }, [])
 
   const [saldo, setSaldo] = useState(0);
   const [saludo, setSaludo] = useState('');

@@ -126,10 +126,18 @@ const Register = () => {
           <img className= 'logo' src="../logoWhite.svg" alt="" width="150"/>
           <h1>Registro Bodega</h1>
         
-        <form>
+        <form onSubmit={limpiarDatos}>
           {/* ingreso del nombre */}
             <label  className="form-label">Nombre</label>
-            <input type="text" onChange={(event) => {setFirstName(event.target.value)}} className="form-control" value={firstName}  placeholder='Ingrese su nombre' minLength='3' maxLength='50' required/>        
+            <input 
+            type="text" 
+            onChange={(event) => {setFirstName(event.target.value)}} 
+            className="form-control" value={firstName}  
+            placeholder='Ingrese su nombre' 
+            minLength='3' 
+            maxLength='50' 
+            required
+            />        
           
           {/* ingreso del apellido */}
             <label  className="form-label">Apellido</label>
@@ -171,7 +179,7 @@ const Register = () => {
 
 
           {/* boton de registro */}
-            <input type="submit" onClick={addUser} onSubmit={limpiarDatos} value="Registrarme"/>
+            <input type="submit" onClick={addUser}  value="Registrarme"/>
             <a href ='' onClick={() =>{navigate('/');}}>¿Ya tienes cuenta? Inicia sesión aqui</a>
        
         </form>

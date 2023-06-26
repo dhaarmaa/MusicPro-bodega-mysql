@@ -174,13 +174,7 @@ app.post('/compareData', (req, res) => {
           } else {
               console.log(result);
             if (result.length > 0) {
-              // Los datos coinciden, usuario autenticado
-            //   const redirectUrl = url.format({
-            //     pathname: '/', // Reemplaza '/otra-pagina' con la URL de la página a la que deseas redirigir al usuario
-            //     query: {
-            //       userId: result[0].id, // Puedes pasar cualquier parámetro adicional que necesites a través de la URL
-            //     },
-            //   });
+
               res.status(200).json({ success: true, message: 'Datos coinciden'});
               
             } else {

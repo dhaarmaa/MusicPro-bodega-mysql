@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function TransportIntegration() {
   const [codigoSeguimientoTranspTeacher, setCodigoSeguimientoTranspTeacher] = useState('');
+  const navigate = useNavigate();
+
 
 
   const enviarSolicitud =  () => {
@@ -30,6 +33,27 @@ function TransportIntegration() {
    
   return (
     <div className="container">
+      <nav className="navbar bg-dark bg-body-tertiary">
+        <div className="container-fluid">
+        
+        <a className="navbar-brand text-light" onClick={() =>{navigate('/home');}}><img src="logoWhite.svg" alt="Bootstrap" width="60" height="60"/> Familia Bodega </a>
+        
+
+        <form className="d-flex " >
+         <li>
+         <a href ='' onClick={() =>{navigate('/transport');}} className="text-light">
+        Transporte</a>
+      </li>
+      <li>
+         <a href ='' onClick={() =>{navigate('/wareHouse');}} className="text-light">
+        Bodega</a>
+      </li>
+      <li>
+          <a href ='' onClick={() =>{navigate('/');}} className="text-light">Salir</a>
+      </li>
+        </form>
+      </div>
+    </nav>
     <button onClick={enviarSolicitud}>Enviar Solicitud</button>
 
     <div >

@@ -163,8 +163,12 @@ const apiSaldo = ()=>{
 
         <form className="d-flex " >
          <li>
-         <a href ='' onClick={() =>{navigate('/integration');}} className="text-light">
+         <a href ='' onClick={() =>{navigate('/transport');}} className="text-light">
         Transporte</a>
+      </li>
+      <li>
+         <a href ='' onClick={() =>{navigate('/wareHouse');}} className="text-light">
+        Bodega</a>
       </li>
       <li>
           <a href ='' onClick={() =>{navigate('/');}} className="text-light">Salir</a>
@@ -202,7 +206,7 @@ const apiSaldo = ()=>{
             <span className="input-group-text bg-dark text-light" id="basic-addon1">Descripcion</span>
             <input type="text"
             onChange={(event) => {setDescription(event.target.value)}}
-            className="form-control bg-dark text-light" value={description} placeholder="Ingrese Descripcion del Producto" aria-label="Username" aria-describedby="basic-addon1"/>
+            className="form-control bg-dark text-light" value={description} placeholder="Ingrese Descripcion del Producto" aria-label="Username" aria-describedby="basic-addon1" maxLength="1000" minLength="10"/>
           </div>
 
           {/* campo precio */}

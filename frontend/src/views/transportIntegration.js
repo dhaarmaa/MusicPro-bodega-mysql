@@ -15,10 +15,11 @@ function TransportIntegration() {
       Axios.post('https://musicpro.bemtorres.win/api/v1/transporte/solicitud', {
         nombre_origen: 'Mario Perez',
         direccion_origen: 'Av 1 de mayo # 1-1',
+        celular_origen: '23424232',
         nombre_destino: 'Marcela Torres',
         direccion_destino: 'Calle 1 # 1-1',
-        comentario: 'Envio de documentos',
-        info: ''
+        celular_destino: '2312441',
+        obs: 'Envio de documentos'
       }).then((res) => { 
         console.log(res);
         setCodigoSeguimientoTranspTeacher(res.data.codigo_seguimiento);

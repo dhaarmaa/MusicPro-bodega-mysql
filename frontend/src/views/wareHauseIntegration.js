@@ -1,5 +1,6 @@
-import react from 'react';
+import React, {useState , useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 
 const WareHouseIntegration = () => {
     const navigate = useNavigate();
@@ -12,6 +13,19 @@ const WareHouseIntegration = () => {
 // myModal.addEventListener('shown.bs.modal', () => {
 //   myInput.focus()
 // })
+
+    const [productList, setProductList] = useState([])
+
+    const solicitarProductos = () =>{
+        Axios.get('https://musicpro.bemtorres.win/api/v1/bodega/producto')
+        .then((response) => {
+            setProductList(response.data.productos)
+        })
+    }
+
+    useEffect(() => {
+        solicitarProductos();
+      }, [])
 
     return(
         <div>
@@ -31,7 +45,37 @@ const WareHouseIntegration = () => {
                         </li>
                     </form>
       </div>
-    </nav>
+            </nav>
+      
+        <div className="tableProduct">
+      <table className="table table-dark">
+            <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Codigo</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          {
+            productList.map((val, key) => {
+              return <tr key={val.id}>
+                <th scope="row">{val.id}</th>
+                <td>{val.nombre}</td>
+                <td>{val.codigo}</td>
+                <td>{val.descripcion}</td>
+                <td>{val.precio}</td>
+                </tr>
+            })
+          }
+            
+          
+        </tbody>
+      </table>
+      </div>
         </div>
         
     )
